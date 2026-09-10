@@ -14,7 +14,10 @@ COPY package.json pnpm-lock.yaml ./
 # npm install -g pnpm: 全局安装 pnpm 包管理器
 # pnpm install: 安装所有依赖（包括 devDependencies，构建需要 TypeScript、Vite 等）
 # 注意：不使用 --prod 标志，因为构建阶段需要完整的开发环境
-RUN corepack enable && pnpm install --config.packageManagerStrictVersion=false --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
+    corepack enable && pnpm install --config.packageManagerStrictVersion=false
+
+
 # 3. 复制源代码并构建
 COPY . .
 # 执行构建命令 (vite build)，生成的静态文件会存放在 /app/dist 目录
