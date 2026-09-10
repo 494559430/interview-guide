@@ -24,7 +24,7 @@ COPY app/build.gradle app/
 # || true:
 #   "兜底策略" (Fail-Safe)。即使预下载失败（比如因配置不完整），也不要打断构建。
 #   反正后续的 'bootJar' 步骤会再次检查并下载依赖。
-RUN ./gradlew dependencies --no-daemon || true
+RUN --mount=type=cache,target=/root/.gradle ./gradlew dependencies --no-daemon || true
 
 # 3. 复制源代码
 # 将整个项目代码复制进来。由于上面的步骤已经缓存了依赖，
@@ -34,7 +34,7 @@ COPY . .
 # 4. 执行构建
 # :app:bootJar -> 只构建 app 模块，生成可执行的 JAR 包
 # -x test      -> 跳过单元测试（加快构建速度）
-RUN ./gradlew :app:bootJar --no-daemon -x test
+RUN --mount=type=cache,target=/root/.gradle ./gradlew :app:bootJar --no-daemon -x test
 
 # ==============================================================================
 # 第二阶段：运行环境 (Runtime Stage)
