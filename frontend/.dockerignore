@@ -35,3 +35,4 @@ coverage
 # Documentation
 *.md
 !README.md
+!app/src/main/resources/skills/**/*.md
