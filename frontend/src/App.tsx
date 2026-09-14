@@ -7,7 +7,7 @@ import type { Difficulty } from './components/UnifiedInterviewModal';
 import type { CategoryDTO } from './api/skill';
 import { Loader2 } from 'lucide-react';
 import { ROUTE_PATTERNS, ROUTES } from './constants/routes';
-
+import { generateUUID } from './utils/uuid';
 // Lazy load components
 const UploadPage = lazy(() => import('./pages/UploadPage'));
 const HistoryList = lazy(() => import('./pages/HistoryPage'));
@@ -154,7 +154,7 @@ function InterviewWrapper() {
   if (!requestId && !activeSessionId && !entryState.sessionIdToResume) {
     return (
       <Navigate
-        to={ROUTES.interviewCreate(crypto.randomUUID())}
+        to={ROUTES.interviewCreate(generateUUID())}
         replace
         state={{ ...entryState, resumeId: effectiveResumeId }}
       />
