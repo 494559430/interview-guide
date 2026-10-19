@@ -558,7 +558,7 @@ export default function VoiceInterviewPage() {
       setSessionId(session.sessionId);
       setCurrentPhase(session.currentPhase);
 
-      const wsUrl =  buildWebSocketUrl(session.webSocketUrl, session.sessionId);
+      const wsUrl =  buildWebSocketUrl( session.sessionId);
       connectWithHandlers(session.sessionId, wsUrl);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : '创建面试会话失败，请重试';
@@ -618,7 +618,7 @@ export default function VoiceInterviewPage() {
         restored.push({ role: 'ai', text: pendingAi.text, id: pendingAi.id });
       }
       setMessages(restored);
-      const wsUrl =  buildWebSocketUrl(session.webSocketUrl, session.sessionId);
+      const wsUrl =  buildWebSocketUrl(session.sessionId);
       connectWithHandlers(session.sessionId, wsUrl);
     } catch (error) {
       setError(error instanceof Error ? error.message : '恢复会话失败');

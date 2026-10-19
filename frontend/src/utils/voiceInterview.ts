@@ -8,7 +8,6 @@ export function getTemplateName(skillId: string, skills: SkillDTO[]): string {
  * 优先按当前页面的协议和域名推导，避免后端写死 localhost 导致部署后连不上。
  */
 export function buildWebSocketUrl(
-  serverProvidedUrl: string | undefined,
   sessionId: number
 ): string {
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
