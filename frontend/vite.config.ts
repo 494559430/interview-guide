@@ -33,6 +33,11 @@ export default defineConfig(({ mode }) => {
           target: apiProxyTarget,
           changeOrigin: true,
         },
+     '/ws': {
+              target: apiProxyTarget.replace(/^http/, 'ws'),
+              ws: true,
+              changeOrigin: true,
+            },
       },
       // 忽略 @ricky0123/vad-web 的 sourcemap 警告
       sourcemapIgnoreList: (relativeSourcePath) => {
